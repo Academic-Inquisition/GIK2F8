@@ -1,16 +1,16 @@
 {
-  "name": "first_assignment",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "run_main": "nodemon main.js"
+  "name":"assignment_project",
+  "version":"1.0.0",
+  "description":"",
+  "main":"main.js",
+  "scripts":{
+    "run_main":"nodemon ./main.js localhost 8000 -L --watch ./html/* --watch ./css/* --watch ./js/* -e js,mjs,json,html"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "nodemon": "^2.0.20",
-    "tailwindcss": "^3.2.2"
+  "keywords":[ ],
+  "author":"Lanse505",
+  "license":"MIT",
+  "dependencies":{
+    "nodemon":"^2.0.20",
+    "tailwindcss":"^3.2.2"
   }
 }

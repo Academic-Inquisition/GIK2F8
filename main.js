@@ -22,7 +22,7 @@ const server = http.createServer((req, res) => {
       'Content-type': 'text/html',
       'my-own-header': 'hello-world'
     });
-    res.end(notFound)
+    //res.end(notFound)
     res.end('<h1>Page not found!</h1>');
   }
 });
