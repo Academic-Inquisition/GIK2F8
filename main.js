@@ -6,8 +6,11 @@ const search = fs.readFileSync(`${__dirname}/html/search.html`)
 const todo = fs.readFileSync(`${__dirname}/html/todo.html`)
 const notFound = fs.readFileSync(`${__dirname}/html/404.html`)
 
+const search_js = fs.readFileSync(`${__dirname}/js/search.js`)
+
 const server = http.createServer((req, res) => {
   const pathName = req.url;
+
   if (pathName === '/' || pathName === '/index') {
     res.writeHead(200, {'Content-type': 'text/html'})
     res.end(index)
@@ -17,13 +20,15 @@ const server = http.createServer((req, res) => {
   } else if (pathName === '/todo') {
     res.writeHead(200, {'Content-type': 'text/html'})
     res.end(todo)
+  } else if (pathName === '/js/search.js') {
+    res.writeHead(200, {'Content-type': 'text/javascript'})
+    res.end(search_js)
   } else {
     res.writeHead(404, {
       'Content-type': 'text/html',
       'my-own-header': 'hello-world'
     });
-    //res.end(notFound)
-    res.end('<h1>Page not found!</h1>');
+    res.end(notFound)
   }
 });
 
