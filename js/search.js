@@ -1,52 +1,31 @@
-const searchInput = null
-const bookList = [
-  {
-    id: 1,
-    author: 'Charles Dickens',
-    title: 'Oliver Twist'
-  },
-  {
-    id: 2,
-    author: 'William Shakespear',
-    title: 'Hamlet'
-  }
-]
+let bookList = [];
 
-/*
-  1. Ta emot/läsa av värdet i Input-fältet.
-  2. Skicka värdet till searchBook funktionen.
-  3. searchBook returnerar en filtrerad lista.
-  4. Filtrerade listan skickas till renderList.
- */
-function handleKeyPress(input) {
-  const result = searchBooks(input)
-  renderBookList(result)
-}
+window.addEventListener("load", () => {
+  getAll().then((apiBooks) => (bookList = apiBooks));
+})
 
-/*
-  1. Loopa igenom bookList.
-  2. För varje varv i loopen, ta det aktuella elementet (boken).
-  3. Jämför titeln med söktermen.
-  4. Om söktermen finns någonstans i titeln, lägg till elementet i en ny lista (filteredList).
-  5. Returnera filteredList eller anropa renderBookList?
- */
+const searchField = document.getElementById('searchField')
+searchField.addEventListener('keyup', (e) => searchBooks(e.target.value));
+
 function searchBooks(searchTerm) {
-  const filteredList = [];
-  for(let i = 0; i < bookList.length; i++) {
-    const title = bookList[i].title.toLowerCase();
-    if (title.indexOf(searchTerm.toLowerCase()) >= 0) {
-      filteredList.push(bookList[i])
-    }
-  }
-  return filteredList;
+  renderBookList(
+    bookList.filter(({ author, title }) => {
+      return author.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0 ||
+             title.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0
+    })
+  )
 }
 
 /*
   Element i HTML-listan visas/döljs beroende på listans innehåll.
  */
 function renderBookList(searchResults) {
-  console.log("Printad ifrån 'renderBookList'")
-  console.log(searchResults);
+  const existingElement = document.querySelector(".book-list")
+  console.log(existingElement)
+  const root = document.getElementById('root')
+  console.log(existingElement != null)
+  if (existingElement != null)
+    root.removeChild(existingElement)
+  if (searchResults.length > 0 && searchField.value)
+    root.insertAdjacentHTML("beforeend", BookList(searchResults))
 }
-
-handleKeyPress("e")

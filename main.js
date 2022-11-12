@@ -6,6 +6,11 @@ const search = fs.readFileSync(`${__dirname}/html/search.html`)
 const todo = fs.readFileSync(`${__dirname}/html/todo.html`)
 const notFound = fs.readFileSync(`${__dirname}/html/404.html`)
 
+const API = fs.readFileSync(`${__dirname}/js/api/api.js`)
+
+const BookList = fs.readFileSync(`${__dirname}/js/component/BookList.js`)
+const BookListItem = fs.readFileSync(`${__dirname}/js/component/BookListItem.js`)
+
 const search_js = fs.readFileSync(`${__dirname}/js/search.js`)
 
 const server = http.createServer((req, res) => {
@@ -23,6 +28,15 @@ const server = http.createServer((req, res) => {
   } else if (pathName === '/js/search.js') {
     res.writeHead(200, {'Content-type': 'text/javascript'})
     res.end(search_js)
+  } else if (pathName === '/js/component/BookList.js') {
+    res.writeHead(200, {'Content-type': 'text/javascript'})
+    res.end(BookList)
+  } else if (pathName === '/js/component/BookListItem.js') {
+    res.writeHead(200, {'Content-type': 'text/javascript'})
+    res.end(BookListItem)
+  } else if (pathName === '/js/api/api.js') {
+    res.writeHead(200, {'Content-type': 'text/javascript'})
+    res.end(API)
   } else {
     res.writeHead(404, {
       'Content-type': 'text/html',
